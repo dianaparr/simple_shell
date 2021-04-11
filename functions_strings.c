@@ -81,19 +81,22 @@ int _strncmp(char *s1, char *s2, size_t n_bytes)
  *_strcmp - compare two strings
  *@s1: string one
  *@s2: string two
- *Return:
+ *Return: If s1 and s2 are equal, returns 0; if s1 is greater than s2, 
+ returns 1. If these two conditions are not fulfilled, returns -1
  */
 
 int _strcmp(char *s1, char *s2)
 {
 	int q;
 
-	for (q = 0; s1[q] && s2[q] != '\0'; q++)
+	if (_strlen(s1) == _strlen(s2))
 	{
-		if (s1[q] != s2[q])
-		{
-			return (s1[q] - s2[q]);
-		}
+		for (q = 0; s1[q] && s2[q] != '\0'; q++)
+			if (s1[q] != s2[q])
+				return (s1[q] - s2[q]);
+		return (0);
 	}
-	return (0);
+	else if (_strlen(s1) > _strlen(s2))
+		return (1);
+	return (-1);
 }
