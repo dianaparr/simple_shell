@@ -6,6 +6,7 @@ int main(void)
 	char *buff = NULL;
 	size_t bytes = 0;
 	pid_t child = 0;
+	
 	while(entry != EOF)
 	{
 		count_pro++;
@@ -18,10 +19,10 @@ int main(void)
 			child = fork();
 			if (child == 0)
 			{
-				if(buff[0] == '/')
-				{
+				if (buff[0] == '/')
 					read_path(buff, count_pro);
-				}
+				else
+					read_commands(buff, count_pro);
 			}
 			else if (child == -1)
 				free(buff), write(STDOUT_FILENO, "Error\n", 6);
@@ -31,7 +32,7 @@ int main(void)
 		else
 			free(buff);
 	}
-	free(buff);
+	/*free(buff);*/
 	write(STDOUT_FILENO, "\n", 1);
 	return (0);
 }

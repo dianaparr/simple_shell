@@ -6,7 +6,7 @@ char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 	int i = 0, len = 0;
 	
 	len = _strlen(buff);
-	buff_two = calloc(len, sizeof(char *));
+	buff_two = _calloc(len, sizeof(char *));
 	if (buff_two == NULL)
 		return (NULL);
 	for ( ; i < count_wds; i++)
@@ -39,13 +39,47 @@ int _words(char *buff)
     return number_w;
 }
 
-void free_double_pointer(char **buff, int count_wds)
+/**
+ *_calloc - function that allocates memory for an array
+ *@nmemb: number of memory blocks
+ *@size: size of each block
+ *Return: pointer to mem_arr or NULL (if it fails)
+ */
+
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	unsigned int i;
+	char *mem_arr;
+
+	if (nmemb == 0 || size == 0)
+	{
+		return (NULL);
+	}
+	mem_arr = malloc(nmemb * size);
+	if (mem_arr == NULL)
+	{
+		return (NULL);
+	}
+	for (i = 0; i < (nmemb * size); i++)
+	{
+		mem_arr[i] = 0;
+	}
+	return (mem_arr);
+}
+
+char *_getenv(const char *name)
 {
 	int i = 0;
+	unsigned int len = 0;
+	char *value = NULL, *address = NULL;
 
-	for ( ; i < count_wds ; i++)
+	len = _strlen((char *)name);
+	for ( ; environ[i] != NULL; i++)
 	{
-		free(buff[i]);
+		address = environ[i];
+		value = _strchr(address, '=');
+		if (value && (((value - address) == len) && !_strncmp(address, (char *)name, len)))
+			return (value + 1);
 	}
-	free(buff);
+	return (NULL);
 }

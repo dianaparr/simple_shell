@@ -11,6 +11,8 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+extern char **environ;
+
 void read_path(char *buff, int count_pro);
 char **alloc_double_pointer(int count_wds, char *buff, char *delim);
 void free_double_pointer(char **buff, int count_wds);
@@ -18,5 +20,12 @@ int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strtok(char *s, char *delim);
 int _words(char *buff);
+void *_calloc(unsigned int nmemb, unsigned int size);
+void read_commands(char *buff, int count_pro);
+char *_getenv(const char *var);
+char *_strchr(char *s, char c);
+int _strncmp(char *s1, char *s2, size_t n_bytes);
+int _strcmp(char *s1, char *s2);
+char *_strcat(char *dest, char *src);
 
 #endif /* HEADER_FILE_H */
