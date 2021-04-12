@@ -2,37 +2,21 @@
 
 void read_path(char *buff, int count_pro)
 {
-	int count_wds = 0, state = 0, p = 0;
-	char **dp = NULL, *delim = NULL, *number = NULL;
+	int count_wds = 0, state = 0;
+	char **dp = NULL, *delim = " ";
 	struct stat st_s;
 
-	delim = " ";
 	count_wds = _words(buff);
 	dp = alloc_double_pointer(count_wds, buff, delim);
 	state = stat(dp[0], &st_s);
 	if (state == 0)
 	{
-		if (((p = execve(dp[0], dp, NULL)) == -1))
-		{
-			number = _itoa(count_pro);
-			write(STDOUT_FILENO, number, _strlen(number)), write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, buff, _strlen(buff)),
-				write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, "Permission denied\n", 18);
-			/*perror("execve");*/
-			free(number);
-			free(dp);
-			free(buff);
-			exit(1);
-		}	
-		
-	}		 
+		if ((execve(dp[0], dp, NULL) == -1))
+			error_execve_paths(buff, count_pro),
+			free(dp), free(buff), exit(1);
+	}
 	else
-		number = _itoa(count_pro),
-		write(STDOUT_FILENO, number, _strlen(number)), write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, buff, _strlen(buff)), 
-			write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, "not found\n", 11);
-	free(number);
-	free(dp);
-	free(buff);
-	exit(1);
+		error_stat_paths(buff, count_pro), free(dp), free(buff), exit(1);
 }
 
 void read_commands(char *buff, int count_pro)
@@ -64,18 +48,17 @@ void read_commands(char *buff, int count_pro)
 				r_ex = execve(dest, dp_commands, NULL);
 				if (r_ex == -1)
 					printf("%d: %s: not found\n", count_pro, buff), free(dp_path), free(dp_commands), free(buff), exit(-1);
+				else
+					free(dp_path), free(dp_commands), free(buff), exit(1);
 				closedir(o_dir);
 				dp_path = NULL;
 				break;
 			}
 		}
-		closedir(o_dir);
+		/* closedir(o_dir); */
 		counts_path++;
 	}
 	printf("%d: %s: not found\n", count_pro, buff);
-	free(dp_path);
-	free(dp_commands);
-	free(buff);
-	exit(1);
+	free(dp_path), free(dp_commands), free(buff), exit(1);
 }
 

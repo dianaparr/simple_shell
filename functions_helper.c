@@ -6,12 +6,11 @@ char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 	int i = 0, len = 0;
 	
 	len = _strlen(buff);
-	buff_two = _calloc(len, sizeof(char *));
+	buff_two = malloc(len * sizeof(char *));
 	if (buff_two == NULL)
 		return (NULL);
 	for ( ; i < count_wds; i++)
 	{
-		/* printf("%s\n", buff); */
 		if (i == 0)
 			p = strtok(buff, delim);
 		else
