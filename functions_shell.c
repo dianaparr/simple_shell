@@ -3,7 +3,7 @@
 void read_path(char *buff, int count_pro)
 {
 	int count_wds = 0, state = 0, p = 0;
-	char **dp = NULL, *delim = NULL;
+	char **dp = NULL, *delim = NULL, *number = NULL;
 	struct stat st_s;
 
 	delim = " ";
@@ -14,8 +14,11 @@ void read_path(char *buff, int count_pro)
 	{
 		if (((p = execve(dp[0], dp, NULL)) == -1))
 		{
-			printf("%d: %s: Permission denied\n", count_pro, buff);
+			number = _itoa(count_pro);
+			write(STDOUT_FILENO, number, _strlen(number)), write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, buff, _strlen(buff)),
+				write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, "Permission denied\n", 18);
 			/*perror("execve");*/
+			free(number);
 			free(dp);
 			free(buff);
 			exit(1);
@@ -23,8 +26,10 @@ void read_path(char *buff, int count_pro)
 		
 	}		 
 	else
-		/* write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, buff, strlen(s)), write(STDOUT_FILENO, ":", 1), write(STDOUT_FILENO, "not found", 9); */
-		printf("%d: %s: not found\n", count_pro, buff);
+		number = _itoa(count_pro),
+		write(STDOUT_FILENO, number, _strlen(number)), write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, buff, _strlen(buff)), 
+			write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, "not found\n", 11);
+	free(number);
 	free(dp);
 	free(buff);
 	exit(1);
@@ -74,25 +79,3 @@ void read_commands(char *buff, int count_pro)
 	exit(1);
 }
 
-/**
- * _strcat - Entry point
- * @src: source
- * @dest: dest
- * Return: -
- */
-
-char *_strcat(char *dest, char *src)
-{
-	int i = 0, j = 0, counter = 0;
-
-	for ( ; dest[i] != '\0'; i++)
-	{
-		counter++;
-	}
-	for ( ; src[j] != '\0'; j++)
-	{
-		dest[counter + j] = src[j];
-	}
-	dest[counter + j] = '\0';
-	return (dest);
-}

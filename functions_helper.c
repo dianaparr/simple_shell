@@ -8,7 +8,7 @@ char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 	len = _strlen(buff);
 	buff_two = _calloc(len, sizeof(char *));
 	if (buff_two == NULL)
-		return (NULL);	
+		return (NULL);
 	for ( ; i < count_wds; i++)
 	{
 		/* printf("%s\n", buff); */
