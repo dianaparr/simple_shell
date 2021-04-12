@@ -8,13 +8,14 @@ char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 	len = _strlen(buff);
 	buff_two = _calloc(len, sizeof(char *));
 	if (buff_two == NULL)
-		return (NULL);
+		return (NULL);	
 	for ( ; i < count_wds; i++)
 	{
+		/* printf("%s\n", buff); */
 		if (i == 0)
 			p = strtok(buff, delim);
 		else
-			p = strtok(0, delim);
+			p = strtok(NULL, delim);
 		buff_two[i] = p;
 	}
 	buff_two[i + 1] = NULL;
@@ -52,18 +53,12 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	char *mem_arr;
 
 	if (nmemb == 0 || size == 0)
-	{
 		return (NULL);
-	}
 	mem_arr = malloc(nmemb * size);
 	if (mem_arr == NULL)
-	{
 		return (NULL);
-	}
 	for (i = 0; i < (nmemb * size); i++)
-	{
 		mem_arr[i] = 0;
-	}
 	return (mem_arr);
 }
 

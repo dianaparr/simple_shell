@@ -2,10 +2,9 @@
 
 void read_path(char *buff, int count_pro)
 {
-	int count_wds = 0, state = 0;
+	int count_wds = 0, state = 0, p = 0;
 	char **dp = NULL, *delim = NULL;
 	struct stat st_s;
-	int p;
 
 	delim = " ";
 	count_wds = _words(buff);

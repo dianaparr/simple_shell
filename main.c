@@ -3,7 +3,7 @@
 int main(void)
 {
 	int count_pro = 0, entry = 0;
-	char *buff = NULL;
+	char *buff = NULL, *buff_two = NULL;
 	size_t bytes = 0;
 	pid_t child = 0;
 	
@@ -19,7 +19,8 @@ int main(void)
 			child = fork();
 			if (child == 0)
 			{
-				if (buff[0] == '/')
+				buff_two = _strtok_v2(buff, " ");
+				if (buff_two[0] == '/')
 					read_path(buff, count_pro);
 				else
 					read_commands(buff, count_pro);

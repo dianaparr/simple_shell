@@ -27,5 +27,6 @@ char *_strchr(char *s, char c);
 int _strncmp(char *s1, char *s2, size_t n_bytes);
 int _strcmp(char *s1, char *s2);
 char *_strcat(char *dest, char *src);
+char *_strtok_v2(char *s, char *delim);
 
 #endif /* HEADER_FILE_H */
