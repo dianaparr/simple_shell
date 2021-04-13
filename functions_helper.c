@@ -3,10 +3,9 @@
 char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 {
 	char **buff_two = NULL, *p = NULL;
-	int i = 0, len = 0;
+	int i = 0;
 	
-	len = _strlen(buff);
-	buff_two = malloc(len * sizeof(char *));
+	buff_two = malloc((count_wds + 1) * sizeof(char *));
 	if (buff_two == NULL)
 		return (NULL);
 	for ( ; i < count_wds; i++)
@@ -17,26 +16,20 @@ char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 			p = strtok(NULL, delim);
 		buff_two[i] = p;
 	}
-	buff_two[i + 1] = NULL;
+	buff_two[i] = NULL;
 	return (buff_two);
 }
 
-int _words(char *buff)
+int _words(char *buff, char delim)
 {
-    int separator = 0, i = 0;
-    unsigned number_w = 0;
+	int i = 0, num_words = 0;
 
-    for ( ; buff[i] != '\0'; i++)
-    {
-        if (buff[i] == ' ' || buff[i] == '\n' || buff[i] == '\t' || buff[i] == ':')
-            separator = 0;
-        else if (separator == 0)
-        {
-            separator = 1;
-            number_w++;
-        }
-    }
-    return number_w;
+	for ( ; buff[i] != '\0'; i++)
+	{
+		if (delim == buff[i])
+			num_words++;
+	}
+	return (num_words + 1);
 }
 
 /**

@@ -21,19 +21,19 @@ int main(void)
 			{
 				buff_two = _strtok_v2(buff, " ");
 				if (buff_two[0] == '/')
-					read_path(buff, count_pro);
+					read_path(buff_two, buff, count_pro);
 				else
-					read_commands(buff, count_pro);
+					read_commands(buff_two, buff, count_pro);
+				free(buff_two);
+				free(buff);
 			}
 			else if (child == -1)
 				free(buff), write(STDOUT_FILENO, "Error\n", 6);
 			else
 				wait(NULL);
 		}
-		else
-			free(buff);
 	}
-	/*free(buff);*/
+	free(buff);
 	write(STDOUT_FILENO, "\n", 1);
 	return (0);
 }
