@@ -2,7 +2,7 @@
 
 char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 {
-	char **buff_two = NULL, *p = NULL;
+	char **buff_two, *p = NULL;
 	int i = 0;
 	
 	buff_two = malloc((count_wds + 1) * sizeof(char *));
@@ -10,6 +10,7 @@ char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 		return (NULL);
 	for ( ; i < count_wds; i++)
 	{
+		/* *buff_two = NULL; */
 		if (i == 0)
 			p = strtok(buff, delim);
 		else

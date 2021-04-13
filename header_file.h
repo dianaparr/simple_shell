@@ -11,6 +11,17 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+/**
+ * struct built - Struct builtin
+ * @name: Specifiers of the builtin
+ * @ptr_func: The function associated to each builtin
+ */
+/* typedef struct built
+{
+    char *name;
+    void (*ptr_func)();
+} built_in;
+*/
 extern char **environ;
 
 void read_path(char *buff_two, char *buff, int count_pro);
@@ -31,5 +42,6 @@ char *_strtok_v2(char *s, char *delim);
 char *_itoa(int number);
 void error_execve_paths(char **dp, int count_pro);
 void error_stat_paths(char **dp, int count_pro);
+int _functions_shell_own(char *buff_two, char *buff);
 
 #endif /* HEADER_FILE_H */

@@ -6,8 +6,8 @@ void read_path(char *buff_two, char *buff, int count_pro)
 	char **dp = NULL, *delim = " ";
 	struct stat st_s;
 
-	count_wds = _words(buff, ' ');
-	dp = alloc_double_pointer(count_wds, buff, delim);
+	count_wds = _words(buff_two, ' ');
+	dp = alloc_double_pointer(count_wds, buff_two, delim);
 	state = stat(dp[0], &st_s);
 	if (state == 0)
 	{
