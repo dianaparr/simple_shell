@@ -46,7 +46,6 @@ void read_commands(char *buff, int count_pro)
  *create_child_commands - create the child process to execute commands
  *@dp_path: double pointer that store the information of the $PATH
  *@dp_commands: double pointer that store the information of the commmands
- *@buff: stores the information entered by the user
  *@count_pro: counter process
  */
 void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
@@ -68,6 +67,7 @@ void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 			wait(NULL);
 			if (child == 0)
 				execve(concat_2, dp_commands, environ);
+			free(concat), free(concat_2);
 			return;
 		}
 		i++;
@@ -76,12 +76,12 @@ void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 	wait(NULL);
 	if (child == 0)
 		error_stat_paths_commands(dp_commands, count_pro);
+	free(concat), free(concat_2);
 }
 
 /**
  *create_child_path - create the child process to execute path
  *@dp: double pointer that store the information of the path
- *@buff: stores the information entered by the user
  *@count_pro: counter process
  */
 void create_child_path(char **dp, int count_pro)

@@ -17,7 +17,7 @@ void error_execve_paths(char **dp, int count_pro)
 }
 
 /**
- *error_stat_paths - when stat fails, it does not find the command
+ *error_stat_paths_commands - when stat fails, it does not find the command
  *@dp: double pointer that contains the information passed on by the user
  *@count_pro: process counter for errors
  *Return: nothing
@@ -30,7 +30,9 @@ void error_stat_paths_commands(char **dp, int count_pro)
 	write(STDOUT_FILENO, number, _strlen(number)), write(STDOUT_FILENO, ": ", 2),
 	write(STDOUT_FILENO, dp[0], _strlen(dp[0])),
 	write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, er, _strlen(er));
+	free_dp(dp);
 	free(number);
+	exit(127);
 }
 
 /**

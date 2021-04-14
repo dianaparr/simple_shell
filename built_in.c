@@ -27,6 +27,7 @@ int _functions_shell_own(char *buff_two)
 		}
 		i++;
 	}
+	free_dp(command);
 	return (-1);
 }
 
@@ -49,11 +50,7 @@ void func_env(char **command)
 	int i = 0;
 
 	for ( ; environ[i] != NULL; i++)
-	{
-		/* if (environ[i] == NULL)
-			break; */
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i])),
 		write(STDOUT_FILENO, "\n", 2);
-	}
 	free(command);
 }
