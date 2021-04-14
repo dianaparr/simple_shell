@@ -1,0 +1,26 @@
+.TH "shellDB$ " version 1.0 "April 15, 2021" "man page of simple shell"
+
+.SH NAME
+hsh \- command line interpreter
+.SH SYNOPSIS
+.B ./hsh
+.SH DESCRIPTION
+
+.SH INVOCATION
+
+.SH COMMANDS
+
+.SH PATH SEARCH
+
+.SH BUILT-IN COMMANDS
+
+.SH ENVIROMENT
+
+.SH EXIT STATUS
+
+.SH SEE ALSO
+.I sh(1)
+.SH AUTHORS
+Diana Parra
+Brian Zapata
+\fBStudents of the Holberton School\fR
