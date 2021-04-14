@@ -23,6 +23,7 @@ int _functions_shell_own(char *buff_two)
 		if ((_strcmp(incor[i].name, command[0])) == 0)
 		{
 			incor[i].ptr_func(command);
+			free(buff_two);
 			return (0);
 		}
 		i++;
@@ -52,5 +53,5 @@ void func_env(char **command)
 	for ( ; environ[i] != NULL; i++)
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i])),
 		write(STDOUT_FILENO, "\n", 2);
-	free(command);
+	free_dp(command);
 }

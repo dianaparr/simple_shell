@@ -72,9 +72,9 @@ void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 		}
 		i++;
 	}
-	child = fork();
+	/* child = fork();
 	wait(NULL);
-	if (child == 0)
+	if (child == 0) */
 		error_stat_paths_commands(dp_commands, count_pro);
 	free(concat), free(concat_2);
 }
@@ -98,4 +98,5 @@ void create_child_path(char **dp, int count_pro)
 		write(STDOUT_FILENO, "Error\n", 6);
 	else
 		wait(NULL);
+	return;
 }
