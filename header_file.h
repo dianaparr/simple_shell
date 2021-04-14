@@ -20,7 +20,7 @@
 typedef struct built
 {
 char *name;
-int (*ptr_func)(char **command);
+void (*ptr_func)(char **command);
 } built_in;
 
 extern char **environ;
@@ -60,6 +60,7 @@ char *_strtok_v2(char *s, char *delim);
 
 /*builtin*/
 int _functions_shell_own(char *buff_two);
-int func_exit(char **command);
+void func_exit(char **command);
+void func_env(char **command);
 
 #endif /* HEADER_FILE_H */

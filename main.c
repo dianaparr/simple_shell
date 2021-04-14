@@ -6,7 +6,7 @@
  */
 int main(void)
 {
-	int count_pro = 0, entry = 0, flag = 0;
+	int count_pro = 0, entry = 0, flag = 0, _built = 0;
 	char *buff = NULL, *buff_two = NULL;
 	size_t bytes = 0;
 
@@ -22,7 +22,10 @@ int main(void)
 		if (entry != EOF)
 		{
 			buff_two = _strtok_v2(buff, " ");
-			if (buff_two[0] == '/')
+			_built = _functions_shell_own(buff_two);
+			if (_built == 0)
+				break;
+			else if (buff_two[0] == '/')
 				read_path(buff_two, count_pro);
 			else
 				read_commands(buff_two, count_pro);
