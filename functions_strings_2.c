@@ -70,7 +70,7 @@ char *_strdup(char *str)
 	while (str[len_str] != '\0')
 		len_str++;
 	p = malloc((len_str + 1) * sizeof(char));
-	if (p == '\0')
+	if (p == NULL)
 		return (NULL);
 	for ( ; i <= len_str; i++)
 		p[i] = str[i];
