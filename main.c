@@ -1,39 +1,36 @@
 #include "header_file.h"
 
+/**
+ *main - Entry point
+ *Return: always (0)
+ */
 int main(void)
 {
-	int count_pro = 0, entry = 0;
+	int count_pro = 0, entry = 0, flag = 0;
 	char *buff = NULL, *buff_two = NULL;
 	size_t bytes = 0;
-	pid_t child = 0;
-	
-	while(entry != EOF)
+
+	while (entry != EOF)
 	{
 		count_pro++;
 		if ((isatty(STDIN_FILENO)) != 0)
 			write(STDOUT_FILENO, "#shellDB$ ", 10);
 		entry = getline(&buff, &bytes, stdin);
-		buff[entry - 1] = '\0';
+		flag = _spaces(buff);
+		if ((buff[0] == 10 && buff[1] == 0) || flag == -1)
+			continue;
 		if (entry != EOF)
 		{
-			child = fork();
-			if (child == 0)
-			{
-				buff_two = _strtok_v2(buff, " ");
-				if (buff_two[0] == '/')
-					read_path(buff_two, buff, count_pro);
-				else
-					read_commands(buff_two, buff, count_pro);
-				free(buff_two);
-				free(buff);
-			}
-			else if (child == -1)
-				free(buff), write(STDOUT_FILENO, "Error\n", 6);
+			buff_two = _strtok_v2(buff, " ");
+			if (buff_two[0] == '/')
+				read_path(buff_two, count_pro);
 			else
-				wait(NULL);
+				read_commands(buff_two, count_pro);
+			free(buff_two);
 		}
 	}
 	free(buff);
-	write(STDOUT_FILENO, "\n", 1);
+	if ((isatty(STDIN_FILENO)) != 0)
+		write(STDOUT_FILENO, "\n", 1);
 	return (0);
 }

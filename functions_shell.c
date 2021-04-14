@@ -1,61 +1,101 @@
 #include "header_file.h"
 
-void read_path(char *buff_two, char *buff, int count_pro)
+/**
+ *read_path - reads the paths that the user enters
+ *@buff: stores the information entered by the user
+ *@count_pro: counter process
+ */
+void read_path(char *buff, int count_pro)
 {
 	int count_wds = 0, state = 0;
 	char **dp = NULL, *delim = " ";
 	struct stat st_s;
 
-	count_wds = _words(buff_two, ' ');
-	dp = alloc_double_pointer(count_wds, buff_two, delim);
+	count_wds = _words(buff, ' ');
+	dp = alloc_double_pointer(count_wds, buff, delim);
 	state = stat(dp[0], &st_s);
 	if (state == 0)
-	{
-		if ((execve(dp[0], dp, NULL) == -1))
-			error_execve_paths(dp, count_pro),
-				free(buff_two), free(dp), free(buff), exit(1);
-	}
+		create_child_path(dp, count_pro), free(dp);
 	else
-		error_stat_paths(dp, count_pro), free(buff_two), free(dp), free(buff), exit(1);
+		error_stat_paths_commands(dp, count_pro), free(dp);
 }
 
-void read_commands(char *buff_two, char *buff, int count_pro)
+/**
+ *read_commands - reads the commands that the user enters
+ *@buff: stores the information entered by the user
+ *@count_pro: counter process
+ */
+void read_commands(char *buff, int count_pro)
 {
-	int count_wds_path = 0, counts_path = 0, count_wds_commands = 0, r_ex = 0;
-	char  *_path = NULL, *dest = NULL, **dp_path = NULL,
+	int count_wds_path = 0, count_wds_commands = 0;
+	char  *_path = NULL, **dp_path = NULL,
 		*delim1 = ":", *delim2 = " ", **dp_commands = NULL;
-	DIR *o_dir;
-	struct dirent *r_dir;
 
 	_path = _getenv("PATH");
 	/* path */
 	count_wds_path = _words(_path, ':');
 	dp_path = alloc_double_pointer(count_wds_path, _path, delim1);
 	/* commands */
-	count_wds_commands = _words(buff_two, ' ');
-	dp_commands = alloc_double_pointer(count_wds_commands, buff_two, delim2);
-	while (dp_path[counts_path] != NULL)
-	{
-		o_dir = opendir(dp_path[counts_path]);
-		while ((r_dir = readdir(o_dir)) != NULL)
-		{
-			if (_strcmp(r_dir->d_name, dp_commands[0]) == 0)
-			{
-				_strcat(dp_path[counts_path], "/");
-				dest = _strcat(dp_path[counts_path], dp_commands[0]);
-				r_ex = execve(dest, dp_commands, NULL);
-				if (r_ex == -1)
-					printf("%d: %s: not found\n", count_pro, buff_two), free(buff_two), free(dp_path), free(dp_commands), free(buff), exit(-1);
-				else
-					free(buff_two), free(dp_path), free(dp_commands), free(buff), exit(1);
-				closedir(o_dir);
-				dp_path = NULL;
-				break;
-			}
-		}
-		counts_path++;
-	}
-	printf("%d: %s: not found\n", count_pro, buff_two);
-	free(buff_two), free(dp_path), free(dp_commands), free(buff), exit(1);
+	count_wds_commands = _words(buff, ' ');
+	dp_commands = alloc_double_pointer(count_wds_commands, buff, delim2);
+	create_child_commands(dp_path, dp_commands, count_pro);
+	free_dp(dp_path), free_dp(dp_commands); /*exit(1);*/
 }
 
+/**
+ *create_child_commands - create the child process to execute commands
+ *@dp_path: double pointer that store the information of the $PATH
+ *@dp_commands: double pointer that store the information of the commmands
+ *@buff: stores the information entered by the user
+ *@count_pro: counter process
+ */
+void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
+{
+	int state = 0, i = 0;
+	char *concat = NULL, *concat_2 = NULL;
+	pid_t child = 0;
+	struct stat st_s;
+
+
+	while (dp_path[i] != NULL)
+	{
+		concat = str_concat(dp_path[i], "/");
+		concat_2 = str_concat(concat, dp_commands[0]);
+		state = stat(concat_2, &st_s);
+		if (state == 0)
+		{
+			child = fork();
+			wait(NULL);
+			if (child == 0)
+				execve(concat_2, dp_commands, environ);
+			return;
+		}
+		i++;
+	}
+	child = fork();
+	wait(NULL);
+	if (child == 0)
+		error_stat_paths_commands(dp_commands, count_pro);
+}
+
+/**
+ *create_child_path - create the child process to execute path
+ *@dp: double pointer that store the information of the path
+ *@buff: stores the information entered by the user
+ *@count_pro: counter process
+ */
+void create_child_path(char **dp, int count_pro)
+{
+	pid_t child = 0;
+
+	child = fork();
+	if (child == 0)
+	{
+		if ((execve(dp[0], dp, environ) == -1))
+			error_execve_paths(dp, count_pro), exit(1);
+	}
+	else if (child == -1)
+		write(STDOUT_FILENO, "Error\n", 6);
+	else
+		wait(NULL);
+}

@@ -16,32 +16,50 @@
  * @name: Specifiers of the builtin
  * @ptr_func: The function associated to each builtin
  */
-/* typedef struct built
+
+typedef struct built
 {
-    char *name;
-    void (*ptr_func)();
+char *name;
+int (*ptr_func)(char **command);
 } built_in;
-*/
+
 extern char **environ;
 
-void read_path(char *buff_two, char *buff, int count_pro);
+/* functions_shell */
+void read_path(char *buff, int count_pro);
+void read_commands(char *buff, int count_pro);
+void create_child_commands(char **dp_path, char **dp_commands, int count_pro);
+void create_child_path(char **dp, int count_pro);
+
+/* functions_helper*/
 char **alloc_double_pointer(int count_wds, char *buff, char *delim);
-void free_double_pointer(char **buff, int count_wds);
-int _strlen(char *s);
-char *_strcpy(char *dest, char *src);
-char *_strtok(char *s, char *delim);
 int _words(char *buff, char delim);
 void *_calloc(unsigned int nmemb, unsigned int size);
-void read_commands(char *buff_two, char *buff, int count_pro);
-char *_getenv(const char *var);
+char *_getenv(const char *name);
+int _spaces(char *buff);
+
+/*functions_strings*/
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
 char *_strchr(char *s, char c);
 int _strncmp(char *s1, char *s2, size_t n_bytes);
 int _strcmp(char *s1, char *s2);
-char *_strcat(char *dest, char *src);
-char *_strtok_v2(char *s, char *delim);
+
+/*functions_strings_2*/
+char *str_concat(char *s1, char *s2);
 char *_itoa(int number);
+char *_strdup(char *str);
+
+/*errors*/
 void error_execve_paths(char **dp, int count_pro);
-void error_stat_paths(char **dp, int count_pro);
-int _functions_shell_own(char *buff_two, char *buff);
+void error_stat_paths_commands(char **dp, int count_pro);
+void free_dp(char **dp);
+
+/*tokenizer*/
+char *_strtok_v2(char *s, char *delim);
+
+/*builtin*/
+int _functions_shell_own(char *buff_two);
+int func_exit(char **command);
 
 #endif /* HEADER_FILE_H */

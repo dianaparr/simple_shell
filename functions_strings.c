@@ -1,11 +1,10 @@
 #include "header_file.h"
 
 /**
- * _strlen - Entry point
- * @s: string
- * Return: length of the string
+ *_strlen - counter of character
+ *@s: string
+ *Return: length of the string
  */
-
 int _strlen(char *s)
 {
 	int i = 0, c = 0;
@@ -16,12 +15,11 @@ int _strlen(char *s)
 }
 
 /**
- **_strcpy - Copy string for dest.
+ *_strcpy - Copy string for destination
  *@dest: destination variable
  *@src: source variable
- *Return: 
+ *Return: string of destination that is, the copy
  */
-
 char *_strcpy(char *dest, char *src)
 {
 	int len = 0;
@@ -38,9 +36,8 @@ char *_strcpy(char *dest, char *src)
  *_strchr - function locates the first occurrence of character
  *@s: string to be examined
  *@c: character to find
- *Return:
+ *Return: a pointer to the character c
  */
-
 char *_strchr(char *s, char c)
 {
 	int i = 0;
@@ -48,17 +45,20 @@ char *_strchr(char *s, char c)
 	for (; s[i] != '\0'; i++)
 	{
 		if (s[i] == c)
-		{
-			return (&s[i]);    /* return a pointer to the character c */
-		}
+			return (&s[i]);
 	}
 	if (s[i] == c)
-	{
 		return (&s[i]);
-	}
 	return ('\0');
 }
 
+/**
+ * _strncmp - compare the first n bytes of the string
+ * @s1: first string to be compared
+ * @s2: second string to be compared
+ * @n_bytes: maximum number of characters to compare
+ * Return: length of the string
+ */
 int _strncmp(char *s1, char *s2, size_t n_bytes)
 {
 	size_t i = 0, j = 0;
@@ -81,10 +81,8 @@ int _strncmp(char *s1, char *s2, size_t n_bytes)
  *_strcmp - compare two strings
  *@s1: string one
  *@s2: string two
- *Return: If s1 and s2 are equal, returns 0; if s1 is greater than s2, 
- returns 1. If these two conditions are not fulfilled, returns -1
+ *Return: if s1 and s2 are equal, returns 0
  */
-
 int _strcmp(char *s1, char *s2)
 {
 	int q;
