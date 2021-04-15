@@ -103,7 +103,11 @@ void relative_path(char **dp_commands, int count_pro)
 	free_dp(dp_commands);
 }
 
-void signal_ctrl_c(__attribute__((unused)) int signal)
+/**
+ *signal_ctrl_c - sends a signal when ctrl+c is pressed
+ *@signal: a signal that is emitted when the user enters ctrl+c
+ */
+void signal_ctrl_c(__attribute__((unused))int signal)
 {
 	write(STDOUT_FILENO, "\n", 1);
 	write(STDOUT_FILENO, "#shellDB$ ", 10);
