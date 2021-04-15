@@ -99,10 +99,10 @@ Our simple shell can be used in two modes which are divided based on the way a u
 On the contrary, in the non-interactive mode, the user enters a command without waiting for the prompt to appear, simply by using pipe | and ./hsh
 
 ### Mode interactive
-![Mode_interactive](https://raw.githubusercontent.com/dianaparr/simple_shell/pics_flowchart/mode_interactive.png)
+![Mode_interactive](https://github.com/dianaparr/simple_shell/blob/d863030ee5b4769ca3681185041afc265ddadc15/pics_flowchart/mode_interactive.png)
 
 ### Mode no-interactive
-![Mode_no_interactive](https://raw.githubusercontent.com/dianaparr/simple_shell/pics_flowchart/Mode_no_interactive.png)
+![Mode_no_interactive](https://github.com/dianaparr/simple_shell/blob/d863030ee5b4769ca3681185041afc265ddadc15/pics_flowchart/Mode_no_interactive.png)
 
 ## Compilation :checkered_flag:
 
@@ -112,7 +112,7 @@ This super shell is compiled with all these flags:
 
 Created on `Ubuntu 14.04 LTS`, compiled with the version `gcc 4.8.4`
 ## More information about our shell :speaking_head:
-You can click on the following [link](https://drive.google.com/file/d/19gYtjMn_bGpWHC7_6iKJU1Dh9mSxMwCZ/view?usp=sharing) to view our program flowchart . You can also read a short [article](https://www.linkedin.com/post/edit/6788296403128000512/) about what happens when we type in the shell, the command "ls -l *.c". 
+You can click on the following [link](https://drive.google.com/file/d/19gYtjMn_bGpWHC7_6iKJU1Dh9mSxMwCZ/view?usp=sharing) to view our program flowchart . You can also read a short [article](https://www.linkedin.com/pulse/what-happens-when-we-type-ls-l-c-shell-diana-parra/?trackingId=MGWvN74V4qEx76Ws4kan6g%3D%3D) about what happens when we type in the shell, the command "ls -l *.c". 
 
 ## Authors :registered:
 :woman_technologist: **Diana Parra**
