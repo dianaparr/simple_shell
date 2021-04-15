@@ -61,8 +61,8 @@ This was quite a challenging project, but one in which we learned a lot. We hope
 |`*str_concat`           | concatenates two strings                 |
 |`*_strcat`          | concatenate two strings             |
 |`relative_path`          | execute a relative path             |
-|`signal_ctrl_c`             | change a integer to string          |
-|`*_strdup`          | sends a signal when ctrl+c is pressed            |
+|`signal_ctrl_c`             | sends a signal when ctrl+c is pressed  |
+|`*_strdup`          | function duplicate of the string           |
 
 
 * **tokenizer.c**
