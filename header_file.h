@@ -49,6 +49,7 @@ int _strcmp(char *s1, char *s2);
 char *str_concat(char *s1, char *s2);
 char *_itoa(int number);
 char *_strdup(char *str);
+void relative_path(char **dp_commands, int count_pro);
 
 /*errors*/
 void error_execve_paths(char **dp, int count_pro);

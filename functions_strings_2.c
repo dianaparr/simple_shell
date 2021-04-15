@@ -76,3 +76,29 @@ char *_strdup(char *str)
 		p[i] = str[i];
 	return (p);
 }
+
+/**
+ *relative_path - excute a relative path
+ *@dp_commands: double pointer that store the information of the commmands
+ *@count_pro: counter process
+ */
+void relative_path(char **dp_commands, int count_pro)
+{
+	int state = 0;
+	struct stat st_s;
+	pid_t child = 0;
+
+	state = stat(dp_commands[0], &st_s);
+	if (state == 0)
+	{
+		child = fork();
+		wait(NULL);
+		if (child == 0)
+			execve(dp_commands[0], dp_commands, environ);
+		free_dp(dp_commands);
+		return;
+	}
+	else
+		error_stat_paths_commands(dp_commands, count_pro);
+	free_dp(dp_commands);
+}

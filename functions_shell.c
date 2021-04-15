@@ -51,13 +51,18 @@ void read_commands(char *buff, int count_pro)
 void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 {
 	int state = 0, i = 0;
-	char *concat = NULL, *concat_2 = NULL;
+	char *concat = NULL, *concat_2 = NULL, *relative_p = "./";
 	pid_t child = 0;
 	struct stat st_s;
 
 
 	while (dp_path[i] != NULL)
 	{
+		if ((_strncmp(dp_commands[0], relative_p, 2)) == 0)
+		{
+			relative_path(dp_commands, count_pro);
+			return;
+		}
 		concat = str_concat(dp_path[i], "/");
 		concat_2 = str_concat(concat, dp_commands[0]);
 		state = stat(concat_2, &st_s);
@@ -72,10 +77,7 @@ void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 		}
 		i++;
 	}
-	/* child = fork();
-	wait(NULL);
-	if (child == 0) */
-		error_stat_paths_commands(dp_commands, count_pro);
+	error_stat_paths_commands(dp_commands, count_pro);
 	free_dp(dp_path), free(concat), free(concat_2);
 }
 
@@ -98,5 +100,5 @@ void create_child_path(char **dp, int count_pro)
 		write(STDOUT_FILENO, "Error\n", 6);
 	else
 		wait(NULL);
-	return;
+	/* return; */
 }
