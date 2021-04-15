@@ -50,6 +50,7 @@ char *str_concat(char *s1, char *s2);
 char *_itoa(int number);
 char *_strdup(char *str);
 void relative_path(char **dp_commands, int count_pro);
+void signal_ctrl_c(__attribute__((unused)) int signal);
 
 /*errors*/
 void error_execve_paths(char **dp, int count_pro);

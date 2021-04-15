@@ -10,6 +10,7 @@ int main(void)
 	char *buff = NULL, *buff_two = NULL;
 	size_t bytes = 0;
 
+	signal(SIGINT, signal_ctrl_c);
 	while (entry != EOF)
 	{
 		count_pro++;

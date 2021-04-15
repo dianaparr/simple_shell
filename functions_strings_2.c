@@ -102,3 +102,9 @@ void relative_path(char **dp_commands, int count_pro)
 		error_stat_paths_commands(dp_commands, count_pro);
 	free_dp(dp_commands);
 }
+
+void signal_ctrl_c(__attribute__((unused)) int signal)
+{
+	write(STDOUT_FILENO, "\n", 1);
+	write(STDOUT_FILENO, "#shellDB$ ", 10);
+}
