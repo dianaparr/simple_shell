@@ -7,7 +7,7 @@
 int main(void)
 {
 	int count_pro = 0, entry = 0, flag, _built = 0;
-	char *buff = NULL, *buff_two = NULL;
+	char *buff = NULL, *buff_two = NULL, *relative_p = "./";
 	size_t bytes = 0;
 
 	signal(SIGINT, signal_ctrl_c);
@@ -26,6 +26,11 @@ int main(void)
 			_built = _functions_shell_own(buff_two);
 			if (_built == 0)
 				continue;
+			else if ((_strncmp(buff_two, relative_p, 2)) == 0)
+			{
+				relative_path(buff_two, count_pro);
+				continue;
+			}
 			else if (buff_two[0] == '/')
 				read_path(buff_two, count_pro);
 			else

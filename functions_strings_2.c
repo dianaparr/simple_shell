@@ -79,28 +79,31 @@ char *_strdup(char *str)
 
 /**
  *relative_path - excute a relative path
- *@dp_commands: double pointer that store the information of the commmands
+ *@buff_two: stores the information entered by the user
  *@count_pro: counter process
  */
-void relative_path(char **dp_commands, int count_pro)
+void relative_path(char *buff_two, int count_pro)
 {
-	int state = 0;
+	int state = 0, count_wds = 0;
+	char **dp = NULL;
 	struct stat st_s;
 	pid_t child = 0;
 
-	state = stat(dp_commands[0], &st_s);
+	count_wds = _words(buff_two, ' ');
+	dp = alloc_double_pointer(count_wds, buff_two, " ");
+	state = stat(dp[0], &st_s);
 	if (state == 0)
 	{
 		child = fork();
 		wait(NULL);
 		if (child == 0)
-			execve(dp_commands[0], dp_commands, environ);
-		free_dp(dp_commands);
+			execve(dp[0], dp, environ);
+		free_dp(dp), free(buff_two);
 		return;
 	}
 	else
-		error_stat_paths_commands(dp_commands, count_pro);
-	free_dp(dp_commands);
+		error_stat_paths_commands(dp, count_pro);
+	free(buff_two);
 }
 
 /**
