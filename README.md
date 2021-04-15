@@ -99,10 +99,10 @@ Our simple shell can be used in two modes which are divided based on the way a u
 On the contrary, in the non-interactive mode, the user enters a command without waiting for the prompt to appear, simply by using pipe | and ./hsh
 
 ### Mode interactive
-![Mode_interactive](https://raw.githubusercontent.com/dianaparr/simple_shell/pics_flowchart/mode_interactive.png
+![Mode_interactive](https://raw.githubusercontent.com/dianaparr/simple_shell/pics_flowchart/mode_interactive.png)
 
 ### Mode no-interactive
-![Mode_no_interactive](https://raw.githubusercontent.com/dianaparr/simple_shell/pics_flowchart/Mode_no_interactive.png
+![Mode_no_interactive](https://raw.githubusercontent.com/dianaparr/simple_shell/pics_flowchart/Mode_no_interactive.png)
 
 ## Compilation :checkered_flag:
 
