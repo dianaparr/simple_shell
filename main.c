@@ -23,7 +23,7 @@ int main(void)
 		if (entry != EOF)
 		{
 			buff_two = _strtok_v2(buff, " ");
-			_built = _functions_shell_own(buff_two);
+			_built = _functions_shell_own(buff_two, buff);
 			if (_built == 0)
 				continue;
 			else if ((_strncmp(buff_two, relative_p, 2)) == 0)
