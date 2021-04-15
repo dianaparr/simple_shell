@@ -30,10 +30,10 @@ This was quite a challenging project, but one in which we learned a lot. We hope
 
 |     FUNCTION       |     SHORT DESCRIPTION           |
 |--------------------|---------------------------------|
-|`read_path`             |                             |
-|`create_child_path` |                                 |
-|`read_commands`         |                             |
-|`create_child_commands`   |                          |
+|`read_path`             | reads the paths that the user enters                             |
+|`create_child_path` | create the child process to execute path                                  |
+|`read_commands`         | reads the commands that the user enters                             |
+|`create_child_commands`   | create the child process to execute commands                          |
 
 
 * **functions_helper.c**: Contains functions that help the shell to perform well.
@@ -41,10 +41,11 @@ This was quite a challenging project, but one in which we learned a lot. We hope
 
 |     FUNCTION       |     SHORT DESCRIPTION           |
 |--------------------|---------------------------------|
-|`**alloc_double_pointer`    |                         |
-|`_words` |                                 |
-|`*_calloc`         |                             |
-|`*_getenv`   |                           |
+|`**alloc_double_pointer`   | create and store information in a double pointer                         |
+|`_words` | word count                                |
+|`*_calloc`         | function that allocates memory for an array                            |
+|`*_getenv`   | scans the environment until a environment variable is found                          |
+|`_spaces`   | confirms if there are only space at the entrance                          |
 
 
 * **functions_strings.c and functions_strings_2.c**: Contains functions for string handling
@@ -57,10 +58,11 @@ This was quite a challenging project, but one in which we learned a lot. We hope
 |`*_strchr`           | function locates the first ocurrence of character                                                |
 |`_strncmp`          | compare the first n bytes of the string|
 |`_strcmp`           | compare two strings                 |
+|`*str_concat`           | concatenates two strings                 |
 |`*_strcat`          | concatenate two strings             |
-|`_itoa`             | change a integer to string          |
-|`*_strdup`          | duplicate of the string            |
-|`*str_concat`       | concatenates two strings           |
+|`relative_path`          | execute a relative path             |
+|`signal_ctrl_c`             | change a integer to string          |
+|`*_strdup`          | sends a signal when ctrl+c is pressed            |
 
 
 * **tokenizer.c**
@@ -79,12 +81,28 @@ This was quite a challenging project, but one in which we learned a lot. We hope
 |--------------------|---------------------------------|
 |`error_execve_paths` | error printed when execve fails |
 |`error_stat_paths` | when stat fails, it does not find the command    |
+|`free_dp` | free a double pointer    |
+
+
+* **built_in.c**: functions for handling built-ins
+
+
+|     FUNCTION       |     SHORT DESCRIPTION           |
+|--------------------|---------------------------------|
+|`_functions_shell_own` | function that stores the built-in functions |
+|`func_exit`   | function for exit of the program     |
+|`func_env`   | function that print the environment     |
 
 
 ## Shell usage :memo:
+Our simple shell can be used in two modes which are divided based on the way a user could interact in it, that is, in the interactive mode the user interacts as many times as he wants in the shell as long as the -#shellDB$ - prompt appears on the screen.
+On the contrary, in the non-interactive mode, the user enters a command without waiting for the prompt to appear, simply by using pipe | and ./hsh
+
 ### Mode interactive
+![Mode_interactive](https://raw.githubusercontent.com/dianaparr/simple_shell/pics_flowchart/mode_interactive.png
 
 ### Mode no-interactive
+![Mode_no_interactive](https://raw.githubusercontent.com/dianaparr/simple_shell/pics_flowchart/Mode_no_interactive.png
 
 ## Compilation :checkered_flag:
 
@@ -93,9 +111,8 @@ This super shell is compiled with all these flags:
      gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 Created on `Ubuntu 14.04 LTS`, compiled with the version `gcc 4.8.4`
-
 ## More information about our shell :speaking_head:
-You can click on the following [link](https://drive.google.com/file/d/19gYtjMn_bGpWHC7_6iKJU1Dh9mSxMwCZ/view?usp=sharing) to view our program flowchart . You can also read a short [article](https://www.linkedin.com/post/edit/6788296403128000512/) about what happens when we type in the shell, the command "ls -l *.c".
+You can click on the following [link](https://drive.google.com/file/d/19gYtjMn_bGpWHC7_6iKJU1Dh9mSxMwCZ/view?usp=sharing) to view our program flowchart . You can also read a short [article](https://www.linkedin.com/post/edit/6788296403128000512/) about what happens when we type in the shell, the command "ls -l *.c". 
 
 ## Authors :registered:
 :woman_technologist: **Diana Parra**
@@ -108,4 +125,3 @@ You can click on the following [link](https://drive.google.com/file/d/19gYtjMn_b
 
 **Project to:** 
 ![](https://www.holbertonschool.com/holberton-logo.png)
-
