@@ -70,10 +70,12 @@ void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 			free_dp(dp_path), free(concat), free(concat_2);
 			return;
 		}
+		free(concat), free(concat_2);
+		concat = NULL, concat_2 = NULL;
 		i++;
 	}
 	error_stat_paths_commands(dp_commands, count_pro);
-	free_dp(dp_path), free(concat), free(concat_2);
+	free_dp(dp_path);
 }
 
 /**
