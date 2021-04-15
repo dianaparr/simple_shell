@@ -15,9 +15,9 @@ void read_path(char *buff, int count_pro)
 	dp = alloc_double_pointer(count_wds, buff, delim);
 	state = stat(dp[0], &st_s);
 	if (state == 0)
-		create_child_path(dp, count_pro), free(dp);
+		create_child_path(dp, count_pro), free_dp(dp);
 	else
-		error_stat_paths_commands(dp, count_pro), free(dp);
+		error_stat_paths_commands(dp, count_pro);
 }
 
 /**
@@ -39,7 +39,7 @@ void read_commands(char *buff, int count_pro)
 	count_wds_commands = _words(buff, ' ');
 	dp_commands = alloc_double_pointer(count_wds_commands, buff, delim2);
 	create_child_commands(dp_path, dp_commands, count_pro);
-	free_dp(dp_path), free_dp(dp_commands); /*exit(1);*/
+	/* free_dp(dp_path), free_dp(dp_commands); */ /*exit(1);*/
 }
 
 /**
@@ -67,7 +67,7 @@ void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 			wait(NULL);
 			if (child == 0)
 				execve(concat_2, dp_commands, environ);
-			free(concat), free(concat_2);
+			free_dp(dp_path), free(concat), free(concat_2);
 			return;
 		}
 		i++;
@@ -76,7 +76,7 @@ void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 	wait(NULL);
 	if (child == 0) */
 		error_stat_paths_commands(dp_commands, count_pro);
-	free(concat), free(concat_2);
+	free_dp(dp_path), free(concat), free(concat_2);
 }
 
 /**

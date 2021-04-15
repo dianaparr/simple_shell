@@ -30,6 +30,7 @@ void error_stat_paths_commands(char **dp, int count_pro)
 	write(STDOUT_FILENO, number, _strlen(number)), write(STDOUT_FILENO, ": ", 2),
 	write(STDOUT_FILENO, dp[0], _strlen(dp[0])),
 	write(STDOUT_FILENO, ": ", 2), write(STDOUT_FILENO, er, _strlen(er));
+	free_dp(dp);
 	free(number);
 	/* exit(127); */
 }

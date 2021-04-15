@@ -38,7 +38,7 @@ int _functions_shell_own(char *buff_two)
  */
 void func_exit(char **command)
 {
-	free(command);
+	free_dp(command);
 	exit(0);
 }
 
