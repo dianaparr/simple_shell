@@ -4,22 +4,51 @@
 hsh \- command line interpreter
 .SH SYNOPSIS
 .B ./hsh
+
 .SH DESCRIPTION
+Our simple \fB$shellBD \fR shell interprets and executes commands passed from standard input or from a relative path (./myls, for example) and can be used interactively and non-interactively.
 
 .SH INVOCATION
+.B “Mode interactive”
+To start in this mode, it is started without arguments and executed with ./hsh, and it is distinguished because its prompt shows it like this: $shellDB . In the background, the shell is repeated infinite times until the user who interacts with it, decides to exit with CTRL + D.
+.B “Mode no-interactive”
+To start in this mode, it is started with arguments and executed with pipeline like this " command | ./hsh".
 
-.SH COMMANDS
-
-.SH PATH SEARCH
-
-.SH BUILT-IN COMMANDS
+.SH COMMANDS EXECUTION
+Our shellDB, after organizing (removing spaces, removing colons, line breaks, among others) the commands that a user enters, stores them and passes them through different functions as arguments.
+In the shell, it first starts by checking whether the command being entered is a built-in function that is stored in a structure.
+Conversely, if the command contains a "/" at the beginning, it performs a function that is intended to execute paths; and if it contains a "./" at the beginning, it executes it as a relative path.
+If none of the above conditions are met, it will be taken as a command.
 
 .SH ENVIROMENT
+There are some variables that are part of the environment in which a process runs, at first these are a copy of the main process and contain a dynamically named value of the form NAME=VALUE, the VALUE are strings.
+One of these environment variables is the $PATH which contains the command search path, that is, it contains a list of directories separated by a colon in which our shell searches in each element of the $PATH for a directory containing an executable directory that matches the name of the command being entered by the user.
+
+.SH EXAMPLES
+.B Built-in:
+#shellDB$ exit
+exits the shell.
+
+.B Relative path:
+#shellDB$ ./myecho
+holberton students
+
+.B Mode  interactive
+#shellDB$ pwd
+/home/vagrant/simple_shell
+#shellDB$ echo man shell
+man shell
+
+.B Mode no interactive
+#shellDB$ echo "pwd" | ./hsh
+/home/vagrant/simple_shell
 
 .SH EXIT STATUS
+If the function is found when searching for the command to execute in the different directories of the $PATH, its output status becomes the shell's output status. If, on the other hand, the function is not defined, the shell prints an error message and returns an output status of 127 (which can be checked with '$?').
 
 .SH SEE ALSO
 .I sh(1)
+
 .SH AUTHORS
 Diana Parra
 Brian Zapata
