@@ -59,6 +59,7 @@ void free_dp(char **dp);
 
 /*tokenizer*/
 char *_strtok_v2(char *s, char *delim);
+char *_strtok(char *str, char *delim);
 
 /*builtin*/
 int _functions_shell_own(char *buff_two, char *buff);

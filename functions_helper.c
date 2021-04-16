@@ -19,9 +19,9 @@ char **alloc_double_pointer(int count_wds, char *buff, char *delim)
 	for ( ; i < count_wds; i++)
 	{
 		if (i == 0)
-			p = _strdup(strtok(buff_copy, delim));
+			p = _strdup(_strtok(buff_copy, delim));
 		else
-			p = _strdup(strtok(NULL, delim));
+			p = _strdup(_strtok(NULL, delim));
 		buff_two[i] = p;
 	}
 	buff_two[i] = NULL;
