@@ -67,7 +67,7 @@ void create_child_commands(char **dp_path, char **dp_commands, int count_pro)
 			wait(NULL);
 			if (child == 0)
 				execve(concat_2, dp_commands, environ);
-			free_dp(dp_path), free(concat), free(concat_2);
+			free_dp(dp_commands), free_dp(dp_path), free(concat), free(concat_2);
 			return;
 		}
 		free(concat), free(concat_2);

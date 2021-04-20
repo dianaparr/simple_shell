@@ -8,37 +8,37 @@
  */
 char *_strtok(char *str, char *delim)
 {
-	static int i, k;
-	static char *s;
-	int j = 0;
-	char *p = NULL;
+    static int i = 0, k;
+    static char *s;
+    char *p = NULL;
 
-	if (str == NULL)
-		i++;
-	else
-		k = _strlen(str), s = str;
-	p = _calloc(512, sizeof(char));
-	if (p == NULL)
-		return (NULL);
-	for ( ; s[i] != '\0'; i++)
-	{
-		if (s[i] == delim[0])
-			continue;
-		else
-		{
-			p[j] = s[i];
-			if (s[i + 1] == delim[0])
-			{
-				j++;
-				break;
-			}
-			j++;
-		}
-	}
-	p[j] = '\0';
-	if (i == k)
-		i = 0;
-	return (p);
+    if (str == NULL)
+        p = s;
+    else
+        k = strlen(str), p = str;
+    while(*p)
+    {
+        if (*p == delim[0])
+          i++, p++;
+        else
+        {
+          s = p;
+          while (*s)
+          {
+            if (*s == delim[0])
+            {
+              i++, *s = '\0', s++;
+              break;
+            }  
+            i++;
+            s++;
+          }  
+          break;
+        }
+    }
+    if (i == k)
+        s = str;
+    return (p);
 }
 /**
  *_strtok_v2 - function that tokenizes a complete string
